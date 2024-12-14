@@ -1,4 +1,4 @@
-import React,{useDeferredValue, useEffect,useState} from "react";
+import React,{useEffect,useState} from "react";
 const App=()=>{
   const [data,setData]=useState([]);
   const [currentPage,setCurrentPage]=useState(1);
@@ -20,6 +20,7 @@ const App=()=>{
       } catch (error) {
         setError('failed to fetch data');
         setIsLoading(false);
+        alert("Failed to fetch data.Please try again later.");
       }
     };
     fetchData();
@@ -51,14 +52,14 @@ const App=()=>{
     <div>
       <h1 style={{textAlign:"center"}}>Employee Data</h1>
       <table border="1" style={{borderCollapse:"collapse",width:"100%"}}>
-        <thread>
+        <thead style={{textAlign:"left",backgroundColor:"green"}}>
           <tr>
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
           </tr>
-        </thread>
+        </thead>
         <tbody>
           {getPaginationData().map((employee)=>(
             <tr key={employee.id}>
@@ -74,15 +75,15 @@ const App=()=>{
         <button
          onClick={handlePrevious}
          disabled={currentPage===1}
-         style={{marginRight:"10px"}}
+         style={{marginRight:"10px",backgroundColor:"green"}}
         >
           Previous
         </button>
-        <span>Page {currentPage}</span>
+        <span>{currentPage}</span>
         <button
           onClick={handleNext}
           disabled={currentPage===Math.ceil(data.length/itemsPerPage)}
-          style={{marginLeft:"10px"}}
+          style={{marginLeft:"10px",backgroundColor:"green"}}
         >
           Next
         </button>
